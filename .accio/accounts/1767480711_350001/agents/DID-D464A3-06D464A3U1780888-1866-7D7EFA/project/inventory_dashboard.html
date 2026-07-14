@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常规进销存仪表盘</title>
+    <style>
+        :root { --red: #cf1322; --orange: #d48806; --green: #389e0d; --bg: #f5f7fa; --card-bg: #ffffff; --text-main: #262626; --text-secondary: #8c8c8c; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: var(--bg); margin: 0; padding: 20px; color: var(--text-main); }
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { margin: 0; font-size: 22px; color: #001529; }
+        .header .date { font-size: 13px; color: var(--text-secondary); margin-top: 5px; }
+        .dashboard-container { display: flex; gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .column { flex: 1; }
+        .column-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 15px; border-bottom: 2px solid #e8e8e8; padding-bottom: 8px; }
+        .column-header h2 { margin: 0; font-size: 16px; font-weight: 600; }
+        .column-header .sort-label { font-size: 11px; color: var(--text-secondary); }
+        .item-list { display: flex; flex-direction: column; gap: 10px; }
+        .item-card { background: var(--card-bg); border-radius: 6px; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.04); border-left: 4px solid #d9d9d9; }
+        .item-card.red { border-left-color: var(--red); }
+        .item-card.orange { border-left-color: var(--orange); }
+        .item-card.green { border-left-color: var(--green); }
+        .item-card.urgent-bg { background-color: #fff1f0; }
+        .model-info { display: flex; align-items: center; gap: 8px; }
+        .model-name { font-weight: 600; font-size: 14px; }
+        .badge { font-size: 10px; padding: 1px 6px; border-radius: 4px; font-weight: normal; }
+        .badge-red { background: #fff1f0; color: #cf1322; border: 1px solid #ffa39e; }
+        .badge-orange { background: #fffbe6; color: #d48806; border: 1px solid #ffe58f; }
+        .inventory-info { text-align: right; }
+        .inventory-count { font-size: 16px; font-weight: bold; line-height: 1; }
+        .inventory-label { font-size: 10px; color: var(--text-secondary); margin-top: 2px; }
+        @media (max-width: 768px) { .dashboard-container { flex-direction: column; } }
+    </style>
+</head>
+<body>
+    <div class="header"><h1>常规进销存仪表盘</h1><div class="date">数据日期：2026-07-13 (货品进销存表)</div></div>
+    <div class="dashboard-container">
+        <div class="column">
+            <div class="column-header"><h2>核心主营型号</h2><span class="sort-label">库存升序排列</span></div>
+            <div class="item-list">
+                <div class="item-card red urgent-bg"><div class="model-info"><span class="model-name">D8 PRO</span><span class="badge badge-red">断货</span></div><div class="inventory-info"><div class="inventory-count">0</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card red urgent-bg"><div class="model-info"><span class="model-name">MT30</span><span class="badge badge-red">告急</span></div><div class="inventory-info"><div class="inventory-count">3</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card orange"><div class="model-info"><span class="model-name">MF985</span><span class="badge badge-orange">骤降</span></div><div class="inventory-info"><div class="inventory-count">143</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card green"><div class="model-info"><span class="model-name">MC50 PRO</span></div><div class="inventory-info"><div class="inventory-count">373</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card green"><div class="model-info"><span class="model-name">AX8 PRO</span></div><div class="inventory-info"><div class="inventory-count">633</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card green"><div class="model-info"><span class="model-name">MC80</span></div><div class="inventory-info"><div class="inventory-count">751</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card green"><div class="model-info"><span class="model-name">GE 1800</span></div><div class="inventory-info"><div class="inventory-count">1751</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card green"><div class="model-info"><span class="model-name">U90</span></div><div class="inventory-info"><div class="inventory-count">1804</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card green"><div class="model-info"><span class="model-name">MC60</span></div><div class="inventory-info"><div class="inventory-count">1923</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card green"><div class="model-info"><span class="model-name">MT80</span></div><div class="inventory-info"><div class="inventory-count">2049</div><div class="inventory-label">库存</div></div></div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="column-header"><h2>其他型号</h2><span class="sort-label">库存升序排列</span></div>
+            <div class="item-list">
+                <div class="item-card red urgent-bg"><div class="model-info"><span class="model-name">F95</span><span class="badge badge-red">断货</span></div><div class="inventory-info"><div class="inventory-count">0</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card red urgent-bg"><div class="model-info"><span class="model-name">U80 ULTRA</span><span class="badge badge-red">断货</span></div><div class="inventory-info"><div class="inventory-count">0</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card red urgent-bg"><div class="model-info"><span class="model-name">M100-M</span><span class="badge badge-red">断货</span></div><div class="inventory-info"><div class="inventory-count">0</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card red urgent-bg"><div class="model-info"><span class="model-name">M100</span><span class="badge badge-red">告急</span></div><div class="inventory-info"><div class="inventory-count">4</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card red"><div class="model-info"><span class="model-name">MF980L</span></div><div class="inventory-info"><div class="inventory-count">5</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card orange"><div class="model-info"><span class="model-name">G5010</span></div><div class="inventory-info"><div class="inventory-count">12</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card orange"><div class="model-info"><span class="model-name">MF955V</span></div><div class="inventory-info"><div class="inventory-count">29</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card green"><div class="model-info"><span class="model-name">M200</span></div><div class="inventory-info"><div class="inventory-count">55</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card green"><div class="model-info"><span class="model-name">MT60</span></div><div class="inventory-info"><div class="inventory-count">420</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card green"><div class="model-info"><span class="model-name">MC50</span></div><div class="inventory-info"><div class="inventory-count">647</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card green"><div class="model-info"><span class="model-name">AX8 PRO-M</span></div><div class="inventory-info"><div class="inventory-count">883</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card green"><div class="model-info"><span class="model-name">MF982-QV</span></div><div class="inventory-info"><div class="inventory-count">1228</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card green"><div class="model-info"><span class="model-name">A10S</span></div><div class="inventory-info"><div class="inventory-count">1587</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card green"><div class="model-info"><span class="model-name">MF982-ASR</span></div><div class="inventory-info"><div class="inventory-count">1732</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card green"><div class="model-info"><span class="model-name">U90-M</span></div><div class="inventory-info"><div class="inventory-count">1871</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card green"><div class="model-info"><span class="model-name">MT80-M</span></div><div class="inventory-info"><div class="inventory-count">2110</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card green"><div class="model-info"><span class="model-name">MT10</span></div><div class="inventory-info"><div class="inventory-count">2563</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card green"><div class="model-info"><span class="model-name">F8</span></div><div class="inventory-info"><div class="inventory-count">2659</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card green"><div class="model-info"><span class="model-name">MF985-M</span></div><div class="inventory-info"><div class="inventory-count">2895</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card green"><div class="model-info"><span class="model-name">AX9 pro B</span></div><div class="inventory-info"><div class="inventory-count">3051</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card green"><div class="model-info"><span class="model-name">D9</span></div><div class="inventory-info"><div class="inventory-count">3333</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card green"><div class="model-info"><span class="model-name">MF982</span></div><div class="inventory-info"><div class="inventory-count">4477</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card green"><div class="model-info"><span class="model-name">MT30-M</span></div><div class="inventory-info"><div class="inventory-count">5271</div><div class="inventory-label">库存</div></div></div>
+                <div class="item-card green"><div class="model-info"><span class="model-name">F90</span></div><div class="inventory-info"><div class="inventory-count">8815</div><div class="inventory-label">库存</div></div></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

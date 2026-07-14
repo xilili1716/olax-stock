@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常规进销存仪表盘（搜索版）</title>
+    <style>
+        :root { --red: #cf1322; --orange: #d48806; --green: #389e0d; --bg: #f5f7fa; --card-bg: #ffffff; --text-main: #262626; --text-secondary: #8c8c8c; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: var(--bg); margin: 0; padding: 20px; color: var(--text-main); }
+        .header { text-align: center; margin-bottom: 25px; }
+        .search-container { max-width: 1200px; margin: 0 auto 20px auto; display: flex; gap: 12px; }
+        .search-input { flex: 1; padding: 12px 18px; font-size: 15px; border: 1px solid #d9d9d9; border-radius: 6px; outline: none; }
+        .dashboard-container { display: flex; gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .column { flex: 1; }
+        .column-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 15px; border-bottom: 2px solid #e8e8e8; padding-bottom: 8px; }
+        .item-list { display: flex; flex-direction: column; gap: 10px; }
+        .item-card { background: var(--card-bg); border-radius: 6px; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #d9d9d9; }
+        .item-card.red { border-left-color: var(--red); }
+        .item-card.orange { border-left-color: var(--orange); }
+        .item-card.green { border-left-color: var(--green); }
+        .model-name { font-weight: 600; font-size: 14px; }
+        .inventory-count { font-size: 16px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="header"><h1>常规进销存仪表盘（搜索版）</h1><div>数据日期：2026-07-13</div></div>
+    <div class="search-container"><input type="text" id="searchInput" class="search-input" placeholder="输入型号名称搜索..." oninput="filterModels()"></div>
+    <div class="dashboard-container">
+        <div class="column"><div class="column-header"><h2>所有型号</h2></div><div class="item-list" id="itemList">
+            <div class="item-card red"><div class="model-name">F95</div><div class="inventory-count">0</div></div>
+            <div class="item-card red"><div class="model-name">U80 ULTRA</div><div class="inventory-count">0</div></div>
+            <div class="item-card red"><div class="model-name">D8 PRO</div><div class="inventory-count">0</div></div>
+            <div class="item-card red"><div class="model-name">M100-M</div><div class="inventory-count">0</div></div>
+            <div class="item-card red"><div class="model-name">MT30</div><div class="inventory-count">3</div></div>
+            <div class="item-card red"><div class="model-name">M100</div><div class="inventory-count">4</div></div>
+            <div class="item-card red"><div class="model-name">MF980L</div><div class="inventory-count">5</div></div>
+            <div class="item-card orange"><div class="model-name">G5010</div><div class="inventory-count">12</div></div>
+            <div class="item-card orange"><div class="model-name">MF955V</div><div class="inventory-count">29</div></div>
+            <div class="item-card green"><div class="model-name">M200</div><div class="inventory-count">55</div></div>
+            <div class="item-card orange"><div class="model-name">MF985</div><div class="inventory-count">143</div></div>
+            <div class="item-card green"><div class="model-name">MC50 PRO</div><div class="inventory-count">373</div></div>
+            <div class="item-card green"><div class="model-name">MT60</div><div class="inventory-count">420</div></div>
+            <div class="item-card green"><div class="model-name">AX8 PRO</div><div class="inventory-count">633</div></div>
+            <div class="item-card green"><div class="model-name">MC50</div><div class="inventory-count">647</div></div>
+            <div class="item-card green"><div class="model-name">MC80</div><div class="inventory-count">751</div></div>
+            <div class="item-card green"><div class="model-name">AX8 PRO-M</div><div class="inventory-count">883</div></div>
+            <div class="item-card green"><div class="model-name">MF982-QV</div><div class="inventory-count">1228</div></div>
+            <div class="item-card green"><div class="model-name">A10S</div><div class="inventory-count">1587</div></div>
+            <div class="item-card green"><div class="model-name">MF982-ASR</div><div class="inventory-count">1732</div></div>
+            <div class="item-card green"><div class="model-name">GE1800</div><div class="inventory-count">1751</div></div>
+            <div class="item-card green"><div class="model-name">U90</div><div class="inventory-count">1804</div></div>
+            <div class="item-card green"><div class="model-name">U90-M</div><div class="inventory-count">1871</div></div>
+            <div class="item-card green"><div class="model-name">MC60</div><div class="inventory-count">1923</div></div>
+            <div class="item-card green"><div class="model-name">MT80</div><div class="inventory-count">2049</div></div>
+            <div class="item-card green"><div class="model-name">MT80-M</div><div class="inventory-count">2110</div></div>
+            <div class="item-card green"><div class="model-name">MT10</div><div class="inventory-count">2563</div></div>
+            <div class="item-card green"><div class="model-name">F8</div><div class="inventory-count">2659</div></div>
+            <div class="item-card green"><div class="model-name">MF985-M</div><div class="inventory-count">2895</div></div>
+            <div class="item-card green"><div class="model-name">AX9 pro B</div><div class="inventory-count">3051</div></div>
+            <div class="item-card green"><div class="model-name">D9</div><div class="inventory-count">3333</div></div>
+            <div class="item-card green"><div class="model-name">MF982</div><div class="inventory-count">4477</div></div>
+            <div class="item-card green"><div class="model-name">MT30-M</div><div class="inventory-count">5271</div></div>
+            <div class="item-card green"><div class="model-name">F90</div><div class="inventory-count">8815</div></div>
+        </div></div>
+    </div>
+    <script>
+        function filterModels() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.item-card');
+            cards.forEach(card => {
+                const name = card.querySelector('.model-name').textContent.toLowerCase();
+                card.style.display = name.includes(query) ? 'flex' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>
