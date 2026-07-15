@@ -8,7 +8,7 @@
         :root { --status-red: #ff4d4f; --status-orange: #faad14; --status-green: #52c41a; --bg-gray: #f0f2f5; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: var(--bg-gray); margin: 0; padding: 0; }
         .header { background: #001529; color: white; text-align: center; padding: 25px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
-        .header h1 { margin: 0; font-size: 24px; letter-spacing: 2px; }
+        .header h1 { margin: 0; font-size: 24px; }
         .header .update-date { margin-top: 8px; font-size: 14px; opacity: 0.8; }
         .alert-container { padding: 15px 20px; }
         .alert-bar { background: #fff2f0; border: 1px solid #ffccc7; border-radius: 4px; padding: 12px 20px; color: #cf1322; font-size: 14px; display: flex; align-items: center; gap: 10px; }
@@ -23,34 +23,34 @@
         .red .status-badge { background: #fff1f0; color: #cf1322; border-color: #ffa39e; }
         .orange .status-badge { background: #fffbe6; color: #d48806; border-color: #ffe58f; }
         .green .status-badge { background: #f6ffed; color: #389e0d; border-color: #b7eb8f; }
-        .action-btn { border: none; border-radius: 4px; color: white; padding: 6px 0; font-size: 13px; font-weight: 500; cursor: default; }
+        .action-btn { border: none; border-radius: 4px; color: white; padding: 6px 0; font-size: 13px; font-weight: 500; }
         .red .action-btn { background: var(--status-red); }
         .orange .action-btn { background: var(--status-orange); }
         .green .action-btn { background: var(--status-green); }
     </style>
 </head>
 <body>
-    <div class="header"><h1>半托管实时库存仪表盘</h1><div class="update-date">更新日期：2026-07-13</div></div>
-    <div class="alert-container"><div class="alert-bar"><span>⚠️ 紧急警报：F95、U80 ULTRA、D8 PRO、M100-M 已断货！M100 仅剩 4 台！MT30 仅剩 3 台！MF985 骤降至 143 台！请立即处理。</span></div></div>
+    <div class="header"><h1>半托管实时库存仪表盘</h1><div class="update-date">更新日期：2026-07-14</div></div>
+    <div class="alert-container"><div class="alert-bar"><span>⚠️ F95, U80 ULTRA, D8 PRO, M100-M 断货 | M100 仅剩4台 | M200 降至8台 | MT30 已恢复4263台</span></div></div>
     <div class="dashboard-grid">
-        <div class="card red"><div class="model-name">F95</div><div class="inventory-count">库存: 0</div><div><span class="status-badge">断货</span></div><button class="action-btn">🚫 立即下架</button></div>
-        <div class="card red"><div class="model-name">U80 ULTRA</div><div class="inventory-count">库存: 0</div><div><span class="status-badge">断货</span></div><button class="action-btn">🚫 立即下架</button></div>
-        <div class="card red"><div class="model-name">D8 PRO</div><div class="inventory-count">库存: 0</div><div><span class="status-badge">断货</span></div><button class="action-btn">🚫 立即下架</button></div>
-        <div class="card red"><div class="model-name">M100-M</div><div class="inventory-count">库存: 0</div><div><span class="status-badge">断货</span></div><button class="action-btn">🚫 立即下架</button></div>
-        <div class="card red"><div class="model-name">MT30</div><div class="inventory-count">库存: 3</div><div><span class="status-badge">危急</span></div><button class="action-btn">🚫 立即下架</button></div>
-        <div class="card red"><div class="model-name">M100</div><div class="inventory-count">库存: 4</div><div><span class="status-badge">危急</span></div><button class="action-btn">🚫 立即下架</button></div>
-        <div class="card red"><div class="model-name">MF980L</div><div class="inventory-count">库存: 5</div><div><span class="status-badge">极低</span></div><button class="action-btn">🚫 立即下架</button></div>
-        <div class="card orange"><div class="model-name">G5010</div><div class="inventory-count">库存: 12</div><div><span class="status-badge">极低</span></div><button class="action-btn">🚫 立即下架</button></div>
-        <div class="card orange"><div class="model-name">MF955V</div><div class="inventory-count">库存: 29</div><div><span class="status-badge">重点关注</span></div><button class="action-btn">🔔 重点关注</button></div>
-        <div class="card orange"><div class="model-name">M200</div><div class="inventory-count">库存: 55</div><div><span class="status-badge">重点关注</span></div><button class="action-btn">🔔 重点关注</button></div>
-        <div class="card orange"><div class="model-name">MF985</div><div class="inventory-count">库存: 143</div><div><span class="status-badge">骤降</span></div><button class="action-btn">🔔 优先补货</button></div>
-        <div class="card green"><div class="model-name">MT60</div><div class="inventory-count">库存: 420</div><div><span class="status-badge">已恢复</span></div><button class="action-btn">✔️ 正常销售</button></div>
-        <div class="card green"><div class="model-name">MF982-QV</div><div class="inventory-count">库存: 1228</div><div><span class="status-badge">充足</span></div><button class="action-btn">✔️ 正常销售</button></div>
-        <div class="card green"><div class="model-name">MF982-ASR</div><div class="inventory-count">库存: 1732</div><div><span class="status-badge">充足</span></div><button class="action-btn">✔️ 正常销售</button></div>
-        <div class="card green"><div class="model-name">AX8 PRO-M</div><div class="inventory-count">库存: 883</div><div><span class="status-badge">充足</span></div><button class="action-btn">✔️ 正常销售</button></div>
-        <div class="card green"><div class="model-name">MF985-M</div><div class="inventory-count">库存: 2895</div><div><span class="status-badge">充足</span></div><button class="action-btn">✔️ 正常销售</button></div>
-        <div class="card green"><div class="model-name">MF982</div><div class="inventory-count">库存: 4477</div><div><span class="status-badge">充足</span></div><button class="action-btn">✔️ 正常销售</button></div>
-        <div class="card green"><div class="model-name">MT30-M</div><div class="inventory-count">库存: 5271</div><div><span class="status-badge">充足</span></div><button class="action-btn">✔️ 正常销售</button></div>
+        <div class="card red"><div class="model-name">F95</div><div class="inventory-count">库存: 0</div><div><span class="status-badge">断货</span></div><button class="action-btn">🚫 下架</button></div>
+        <div class="card red"><div class="model-name">U80 ULTRA</div><div class="inventory-count">库存: 0</div><div><span class="status-badge">断货</span></div><button class="action-btn">🚫 下架</button></div>
+        <div class="card red"><div class="model-name">D8 PRO</div><div class="inventory-count">库存: 0</div><div><span class="status-badge">断货</span></div><button class="action-btn">🚫 下架</button></div>
+        <div class="card red"><div class="model-name">M100-M</div><div class="inventory-count">库存: 0</div><div><span class="status-badge">断货</span></div><button class="action-btn">🚫 下架</button></div>
+        <div class="card red"><div class="model-name">M100</div><div class="inventory-count">库存: 4</div><div><span class="status-badge">危急</span></div><button class="action-btn">🚫 下架</button></div>
+        <div class="card red"><div class="model-name">MF980L</div><div class="inventory-count">库存: 5</div><div><span class="status-badge">极低</span></div><button class="action-btn">🚫 下架</button></div>
+        <div class="card red"><div class="model-name">M200</div><div class="inventory-count">库存: 8</div><div><span class="status-badge">极低</span></div><button class="action-btn">🚫 下架</button></div>
+        <div class="card orange"><div class="model-name">G5010</div><div class="inventory-count">库存: 12</div><div><span class="status-badge">极低</span></div><button class="action-btn">🚫 下架</button></div>
+        <div class="card orange"><div class="model-name">MF955V</div><div class="inventory-count">库存: 29</div><div><span class="status-badge">关注</span></div><button class="action-btn">🔔 关注</button></div>
+        <div class="card orange"><div class="model-name">MF985</div><div class="inventory-count">库存: 123</div><div><span class="status-badge">偏低</span></div><button class="action-btn">🔔 关注</button></div>
+        <div class="card green"><div class="model-name">MT60</div><div class="inventory-count">库存: 840</div><div><span class="status-badge">充足</span></div><button class="action-btn">✔️ 正常</button></div>
+        <div class="card green"><div class="model-name">MF982-QV</div><div class="inventory-count">库存: 1178</div><div><span class="status-badge">充足</span></div><button class="action-btn">✔️ 正常</button></div>
+        <div class="card green"><div class="model-name">MF982-ASR</div><div class="inventory-count">库存: 1732</div><div><span class="status-badge">充足</span></div><button class="action-btn">✔️ 正常</button></div>
+        <div class="card green"><div class="model-name">AX8 PRO-M</div><div class="inventory-count">库存: 881</div><div><span class="status-badge">充足</span></div><button class="action-btn">✔️ 正常</button></div>
+        <div class="card green"><div class="model-name">MF985-M</div><div class="inventory-count">库存: 2895</div><div><span class="status-badge">充足</span></div><button class="action-btn">✔️ 正常</button></div>
+        <div class="card green"><div class="model-name">MT30</div><div class="inventory-count">库存: 4263</div><div><span class="status-badge">已恢复</span></div><button class="action-btn">✔️ 正常</button></div>
+        <div class="card green"><div class="model-name">MF982</div><div class="inventory-count">库存: 4477</div><div><span class="status-badge">充足</span></div><button class="action-btn">✔️ 正常</button></div>
+        <div class="card green"><div class="model-name">MT30-M</div><div class="inventory-count">库存: 5269</div><div><span class="status-badge">充足</span></div><button class="action-btn">✔️ 正常</button></div>
     </div>
 </body>
 </html>
