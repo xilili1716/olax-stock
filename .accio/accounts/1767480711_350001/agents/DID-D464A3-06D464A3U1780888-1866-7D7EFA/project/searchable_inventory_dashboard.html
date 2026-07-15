@@ -5,48 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>库存搜索仪表盘</title>
     <style>
-        :root { --red: #cf1322; --orange: #d48806; --green: #389e0d; --bg: #f5f7fa; --card-bg: #ffffff; --text-main: #262626; --text-secondary: #8c8c8c; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: var(--bg); margin: 0; padding: 20px; color: var(--text-main); }
-        .header { text-align: center; margin-bottom: 25px; }
-        .header h1 { margin: 0; font-size: 22px; color: #001529; }
-        .header .date { font-size: 13px; color: var(--text-secondary); margin-top: 5px; }
-        .search-container { max-width: 1200px; margin: 0 auto 20px auto; display: flex; gap: 12px; }
-        .search-input { flex: 1; padding: 12px 18px; font-size: 15px; border: 1px solid #d9d9d9; border-radius: 6px; outline: none; }
+        :root { --red: #cf1322; --orange: #d48806; --green: #389e0d; --bg: #f5f7fa; --text-main: #262626; --text-secondary: #8c8c8c; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); padding: 20px; color: var(--text-main); }
+        .header { text-align: center; margin-bottom: 20px; }
+        .header h1 { font-size: 22px; color: #001529; }
+        .header .date { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+        .controls { max-width: 1200px; margin: 0 auto 15px auto; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+        .search-input { flex: 1; min-width: 200px; padding: 10px 16px; font-size: 15px; border: 1px solid #d9d9d9; border-radius: 6px; outline: none; }
         .search-input:focus { border-color: #1890ff; box-shadow: 0 0 0 2px rgba(24,144,255,0.2); }
-        .clear-btn { padding: 12px 24px; font-size: 15px; border: 1px solid #d9d9d9; border-radius: 6px; background: #fff; color: #595959; cursor: pointer; }
-        .clear-btn:hover { background: #f5f5f5; }
+        .filter-btn { padding: 10px 18px; font-size: 13px; border: 1px solid #d9d9d9; border-radius: 6px; cursor: pointer; background: #fff; transition: all 0.2s; font-weight: 500; white-space: nowrap; }
+        .filter-btn:hover { border-color: #bbb; }
+        .filter-btn.active { color: #fff; border-color: transparent; }
+        .filter-btn.sold-out { color: var(--red); border-color: var(--red); }
+        .filter-btn.sold-out.active, .filter-btn.sold-out:hover { background: var(--red); color: #fff; }
+        .filter-btn.low-stock { color: var(--orange); border-color: var(--orange); }
+        .filter-btn.low-stock.active, .filter-btn.low-stock:hover { background: var(--orange); color: #fff; }
+        .filter-btn.rich-stock { color: var(--green); border-color: var(--green); }
+        .filter-btn.rich-stock.active, .filter-btn.rich-stock:hover { background: var(--green); color: #fff; }
+        .filter-btn.all { color: #595959; }
+        .filter-btn.all.active, .filter-btn.all:hover { background: #595959; color: #fff; }
         .table-container { max-width: 1200px; margin: 0 auto; background: #fff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); overflow: hidden; }
         table { width: 100%; border-collapse: collapse; }
         th { background: #f0f2f5; padding: 12px 16px; text-align: left; font-size: 13px; font-weight: 600; color: #595959; border-bottom: 2px solid #e8e8e8; }
         td { padding: 10px 16px; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
         tr:hover { background: #fafafa; }
-        .stock-low { color: var(--red); font-weight: bold; }
-        .stock-warn { color: var(--orange); font-weight: bold; }
-        .stock-ok { color: var(--green); font-weight: bold; }
+        tr.sold-out-row { background: #fff1f0; }
+        tr.sold-out-row .stock-val { color: var(--red); font-weight: bold; }
+        tr.low-stock-row { background: #fffbe6; }
+        tr.low-stock-row .stock-val { color: var(--orange); font-weight: bold; }
+        tr.rich-stock-row .stock-val { color: var(--green); font-weight: bold; }
         .transit { color: #1890ff; }
         .model-cell { font-weight: 600; }
+        .tag { display: inline-block; padding: 1px 8px; border-radius: 3px; font-size: 11px; font-weight: 500; margin-left: 6px; }
+        .tag-sold { background: #fff1f0; color: var(--red); border: 1px solid #ffa39e; }
+        .tag-low { background: #fffbe6; color: var(--orange); border: 1px solid #ffe58f; }
+        .tag-rich { background: #f6ffed; color: var(--green); border: 1px solid #b7eb8f; }
         .no-result { text-align: center; padding: 40px; color: #8c8c8c; display: none; }
-        .stats-bar { max-width: 1200px; margin: 0 auto 15px auto; display: flex; gap: 15px; font-size: 13px; color: #8c8c8c; }
-        .stats-bar span { background: #fff; padding: 4px 12px; border-radius: 4px; border: 1px solid #e8e8e8; }
+        .stats-bar { max-width: 1200px; margin: 0 auto 10px auto; display: flex; gap: 12px; font-size: 12px; color: #8c8c8c; flex-wrap: wrap; }
+        .stats-bar span { background: #fff; padding: 3px 10px; border-radius: 4px; border: 1px solid #e8e8e8; }
     </style>
 </head>
 <body>
     <div class="header"><h1>OLAX 库存搜索仪表盘</h1><div class="date">数据日期：2026-07-14</div></div>
-    <div class="search-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="输入型号名称搜索（如 MT30、F90）..." oninput="filterModels()">
-        <button class="clear-btn" onclick="clearSearch()">清除</button>
+
+    <div class="controls">
+        <input type="text" id="searchInput" class="search-input" placeholder="输入型号搜索..." oninput="render()">
+        <button class="filter-btn all active" onclick="setFilter('all',this)">全部</button>
+        <button class="filter-btn sold-out" onclick="setFilter('sold',this)">库存售罄</button>
+        <button class="filter-btn low-stock" onclick="setFilter('low',this)">极少量库存</button>
+        <button class="filter-btn rich-stock" onclick="setFilter('rich',this)">库存充足</button>
     </div>
-    <div class="stats-bar"><span id="totalCount">共 35 个型号</span><span id="filteredCount" style="display:none"></span></div>
+
+    <div class="stats-bar"><span id="statsLine">共 34 个型号</span></div>
+
     <div class="table-container">
         <table>
-            <thead><tr><th>型号</th><th>当前库存</th><th>在途数量</th></tr></thead>
-            <tbody id="tableBody">
-            </tbody>
+            <thead><tr><th>型号</th><th style="width:120px">当前库存</th><th style="width:120px">在途数量</th></tr></thead>
+            <tbody id="tableBody"></tbody>
         </table>
         <div class="no-result" id="noResult">未找到匹配的型号</div>
     </div>
+
     <script>
-        const data = [
+        var raw = [
             ["MF982","4477","26"],["MF982-ASR","1732","0"],["MF982-QV","1178","10"],["MF955V","29","0"],["MF980L","5","0"],
             ["MF985","123","5000"],["MF985-M","2895","50"],["MT10","2563","0"],["MT30","4263","20"],["MT30-M","5269","0"],
             ["MT80","2049","5031"],["MT80-M","2110","3049"],["U90-M","1871","0"],["U90","1804","0"],["U80 ULTRA","0","3000"],
@@ -55,23 +77,62 @@
             ["D9","3303","10000"],["AX8 PRO","514","10023"],["AX8 PRO-M","881","8036"],["A10S","1587","0"],["GE1800","1745","0"],
             ["M100","4","5026"],["M100-M","0","5000"],["M200","8","4104"],["MT60","840","1497"]
         ];
-        function stockClass(v) { var n=parseInt(v); if(n<=10) return 'stock-low'; if(n<=100) return 'stock-warn'; return 'stock-ok'; }
-        function render(filter) {
-            var tbody=document.getElementById('tableBody'), q=(filter||'').toLowerCase(), count=0;
-            tbody.innerHTML='';
+
+        var data = raw.slice().sort(function(a,b){ return parseInt(a[1]) - parseInt(b[1]); });
+
+        var currentFilter = 'all';
+
+        function stockCat(v) {
+            var n = parseInt(v);
+            if (n === 0) return 'sold';
+            if (n < 30) return 'low';
+            if (n > 800) return 'rich';
+            return 'mid';
+        }
+
+        function rowClass(cat) {
+            if (cat === 'sold') return 'sold-out-row';
+            if (cat === 'low') return 'low-stock-row';
+            if (cat === 'rich') return 'rich-stock-row';
+            return '';
+        }
+
+        function tagHtml(cat) {
+            if (cat === 'sold') return '<span class="tag tag-sold">售罄</span>';
+            if (cat === 'low') return '<span class="tag tag-low">极低</span>';
+            if (cat === 'rich') return '<span class="tag tag-rich">充足</span>';
+            return '';
+        }
+
+        function render() {
+            var q = (document.getElementById('searchInput').value || '').toLowerCase();
+            var cat = currentFilter;
+            var tbody = document.getElementById('tableBody');
+            var count = 0;
+            tbody.innerHTML = '';
             data.forEach(function(r){
-                if(q && r[0].toLowerCase().indexOf(q)===-1) return;
-                tbody.innerHTML+='<tr><td class="model-cell">'+r[0]+'</td><td class="'+stockClass(r[1])+'">'+r[1]+'</td><td class="transit">'+r[2]+'</td></tr>';
+                var stock = parseInt(r[1]);
+                var c = stockCat(stock);
+                if (cat === 'sold' && c !== 'sold') return;
+                if (cat === 'low' && c !== 'low') return;
+                if (cat === 'rich' && c !== 'rich') return;
+                if (q && r[0].toLowerCase().indexOf(q) === -1) return;
+                tbody.innerHTML += '<tr class="'+rowClass(c)+'"><td class="model-cell">'+r[0]+tagHtml(c)+'</td><td class="stock-val">'+r[1]+'</td><td class="transit">'+r[2]+'</td></tr>';
                 count++;
             });
-            document.getElementById('noResult').style.display=count===0?'block':'none';
-            document.getElementById('filteredCount').style.display=q?'inline':'none';
-            document.getElementById('filteredCount').textContent='匹配 '+count+' 个型号';
-            document.getElementById('totalCount').textContent='共 '+data.length+' 个型号';
+            document.getElementById('noResult').style.display = count === 0 ? 'block' : 'none';
+            var sold = 0, low = 0, rich = 0;
+            data.forEach(function(r){var c=stockCat(parseInt(r[1]));if(c==='sold')sold++;if(c==='low')low++;if(c==='rich')rich++;});
+            document.getElementById('statsLine').innerHTML = '共 '+data.length+' 个型号 | 售罄 '+sold+' | 极低 '+low+' | 充足 '+rich+' | 显示 '+count;
         }
-        function filterModels(){ render(document.getElementById('searchInput').value); }
-        function clearSearch(){ document.getElementById('searchInput').value=''; render(''); }
-        render('');
+
+        function setFilter(f, btn) {
+            currentFilter = f;
+            document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+            btn.classList.add('active');
+            render();
+        }
+        render();
     </script>
 </body>
 </html>
